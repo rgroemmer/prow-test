@@ -17,6 +17,6 @@ presubmits:
         - "--no-push"
     branches: 
     - "main"
-    skip_branches: []
+    #skip_branches:
     trigger: "(?m)qux test this( please)?" # Regexp, see discussion.
     rerun_command: "qux test this please"  # String, see discussion.
