@@ -1,0 +1,22 @@
+presubmits:
+  rgroemmer/prow-test:
+  - name: nginx-build-job            # As for periodics.
+    decorate: true           # As for periodics.
+    always_run: true         # Run for every PR, or only when requested.
+    #run_if_changed: "qux/.*" # Regexp, only run on certain changed files.
+    skip_report: false        # Whether to skip setting a status on GitHub.
+    context: qux-job         # Status context. Defaults to the job name.
+    max_concurrency: 10      # As for postsubmits.
+    spec: 
+      containers: 
+      - image: gcr.io/kaniko-project/executor
+        args:
+        - "--dockerfile=."
+        - "--context=dir://."
+        - "--destination=nginx-test:$BUILD_ID"
+        - "--no-push"
+    branches: 
+    - "main"
+    skip_branches: []
+    trigger: "(?m)qux test this( please)?" # Regexp, see discussion.
+    rerun_command: "qux test this please"  # String, see discussion.
