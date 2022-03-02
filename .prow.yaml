@@ -3,10 +3,6 @@ presubmits:
   - name: pull-kubernetes-validate-prow-yaml
     always_run: true
     decorate: true
-    extra_refs:
-    - org: kubernetes
-      repo: test-infra
-      base_ref: master
     spec:
       containers:
       - image: gcr.io/k8s-prow/checkconfig:v20191205-050b151d0
